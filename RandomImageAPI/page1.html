@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!--
         <style>
             .button
             {
@@ -28,14 +29,23 @@
                 opacity: 0.7;
             }
         </style>
+        -->
+        <link rel="stylesheet" href="mystyle.css">
         <script>
-            function Random_Image() 
+            function refresh_page()
             {
+                location.reload();
+            }
+            function xml_api_call() 
+            {
+                
                 var image_link;
+                
                 var xhr = new XMLHttpRequest();
                 xhr.open("HEAD", "https://picsum.photos/200/300.jpg");
                 xhr.send();
                 
+                //catching the redirect 
                 xhr.onreadystatechange = function()
                 {
                     if(this.readyState == this.DONE)
@@ -47,15 +57,20 @@
                     image_random_1.setAttribute("src", image_link);    
                 }
             }
-            function refresh_page()
+            function fetch_api_call()
             {
-                location.reload();
+                fetch("https://picsum.photos/200/300")
+                .then(response => {
+                    console.log(response);
+                    var image_random_1 = document.getElementById("image1");
+                    image_random_1.setAttribute("src", response["url"]);
+                });
             }
         </script>
     </head>
     <body>
         <div class="SampleDiv">
-            <h1>Refresh the page to get random image</h1>
+            <h1>Use various API calls to get random image</h1>
             <prev>
                 <br>
                 <br>
@@ -68,15 +83,20 @@
                 <br>
                 <br>
                 <br>
+                <br>
+                <br>
+                <br>
+                <br>
             </prev>
             <button class="button" onclick="refresh_page()">Refresh API call</button>
             <prev>
                 <br>
-                <br>
-                <br>
+            </prev>
+            <button class="button" onclick="xml_api_call()">XML API call</button>
+            <prev>
                 <br>
             </prev>
-            <button class="button" onclick="Random_Image()">XML API call</button>
+            <button class="button" onclick="fetch_api_call()">Fetch API call</button>
         </div>
     </body>
 </html>

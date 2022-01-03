@@ -1,2 +1,2 @@
-# JavaScript
-Javascript programs and projects.
+# HTML & JavaScript
+HTML & Javascript programs and projects.
